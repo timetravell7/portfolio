@@ -1,238 +1,247 @@
 import Link from "next/link";
-import Marquee from "@/components/marquee";
 import JourneyMap from "@/components/journey-map";
-import SectionHeading from "@/components/section-heading";
-import ProjectCard from "@/components/project-card";
+import MistTitle from "@/components/mist-title";
+import PainterlyMoment from "@/components/painterly-moment";
+import PrinciplesWeb from "@/components/principles-web";
+import CinematicWork from "@/components/cinematic-work";
 import { projects } from "@/data/projects";
-import { marqueeWords, skillGroups } from "@/data/skills";
 
 export default function Home() {
-  const featured = projects.slice(0, 3);
-
   return (
     <>
-      {/* ——————————————————— HERO ——————————————————— */}
-      <section className="relative overflow-hidden pt-32 md:pt-40">
-        <div className="pointer-events-none absolute inset-0 mesh" aria-hidden />
-        <div className="relative mx-auto grid max-w-[1400px] grid-cols-12 gap-6 px-5 md:px-10">
-          <div className="col-span-12 flex items-center justify-between gap-4 rule-bottom pb-5">
-            <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)]/70">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--plum)]" />
-              Portfolio · 2026 edition
-            </div>
-            <div className="hidden items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)]/70 md:flex">
-              Jakarta · ID{" "}
-              <span className="text-[var(--mute)]">/ UTC+7</span>
-            </div>
-          </div>
+      {/* ═══════════════ SCENE 00 · COLD OPEN ═══════════════ */}
+      <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
+        {/* Background: horizon gradient + topographic lines */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, var(--bone) 0%, #f6efde 55%, #efe4c8 100%)",
+          }}
+        />
+        <TopoLines className="absolute inset-x-0 bottom-[-10%] top-[30%] -z-10 opacity-[0.18]" />
 
-          <div className="col-span-12 mt-10 md:mt-16">
-            <h1 className="display-1 text-[clamp(3.6rem,13vw,12rem)]">
-              <span className="block">Saeful</span>
-              <span className="block">
-                Rohman{" "}
-                <span className="relative inline-block">
-                  <span className="relative z-10">An.</span>
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-0 bottom-[0.08em] -z-0 h-[0.55em] bg-[var(--acid)]"
-                  />
-                </span>
+        {/* Title frame */}
+        <div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center px-5 md:px-10">
+          <div className="flex items-center justify-between pt-32 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)]/60 md:pt-40">
+            <span className="flex items-center gap-2">
+              <span className="relative inline-flex h-2 w-2">
+                <span className="absolute inset-0 animate-ping rounded-full bg-[var(--plum)] opacity-60" />
+                <span className="relative inline-block h-2 w-2 rounded-full bg-[var(--plum)]" />
               </span>
-            </h1>
+              REC · scene 00 / cold open
+            </span>
+            <span className="hidden md:inline">Jakarta · UTC+7 · 2026 edition</span>
           </div>
 
-          <div className="col-span-12 mt-8 grid grid-cols-12 gap-6 md:mt-14">
-            <p className="col-span-12 max-w-2xl text-balance font-sans text-lg leading-relaxed text-[var(--ink)]/80 md:col-span-7 md:text-2xl">
-              Computer Science student building at the intersection of{" "}
-              <em className="font-serif italic">mobile</em>,{" "}
-              <em className="font-serif italic">fullstack web</em>,{" "}
-              <em className="font-serif italic">games</em>, and{" "}
-              <em className="font-serif italic">AI engineering</em> — from
-              autonomous agents to automations that quietly replace entire
-              workflows.
+          <div className="mt-12 md:mt-20">
+            <MistTitle reflectHeight={0.6}>
+              <h1 className="display-1 text-[clamp(4rem,17vw,16rem)] leading-[0.82]">
+                Saeful
+                <br />
+                <span className="font-light italic">Rohman An</span>
+              </h1>
+            </MistTitle>
+          </div>
+
+          <div className="mt-20 grid grid-cols-12 gap-6 md:mt-32">
+            <p className="col-span-12 max-w-2xl text-balance font-serif text-[clamp(1.1rem,1.6vw,1.4rem)] italic leading-[1.4] text-[var(--ink)]/80 md:col-span-7">
+              Computer Science student. I build at the intersection of{" "}
+              <span className="not-italic font-medium">mobile</span>,{" "}
+              <span className="not-italic font-medium">fullstack web</span>,{" "}
+              <span className="not-italic font-medium">games</span>, and{" "}
+              <span className="not-italic font-medium">AI engineering</span>
+              &nbsp;— autonomous agents, automations, and interfaces that move
+              the way they should.
             </p>
 
             <div className="col-span-12 flex flex-col gap-4 md:col-span-5 md:items-end md:justify-end md:text-right">
-              <p className="label text-[var(--mute)]">Now</p>
+              <p className="label text-[var(--mute)]">Now playing</p>
               <p className="font-serif text-xl italic md:text-2xl">
-                Shipping AI agents & fullstack platforms.
+                Shipping agents & fullstack platforms.
               </p>
-              <div className="mt-2 flex gap-2 md:justify-end">
+              <div className="mt-3 flex gap-2 md:justify-end">
+                <Link
+                  href="#journey"
+                  className="inline-flex items-center gap-2 border border-[var(--ink)] bg-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--bone)] transition-transform hover:-translate-y-0.5"
+                >
+                  Begin the scroll ↓
+                </Link>
                 <Link
                   href="/work"
-                  className="inline-flex items-center gap-2 border border-[var(--ink)] bg-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--bone)]"
+                  className="inline-flex items-center gap-2 border border-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-[var(--ink)] hover:text-[var(--bone)]"
                 >
-                  See the work →
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 border border-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em]"
-                >
-                  Start a project
+                  See the work
                 </Link>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Scroll cue + timecode */}
+        <div className="relative mx-auto flex w-full max-w-[1400px] items-end justify-between px-5 pb-10 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink)]/60 md:px-10 md:pb-14">
+          <span>TC · 00:00:01:03</span>
+          <div className="flex flex-col items-center gap-2">
+            <span>scroll</span>
+            <span className="h-14 w-px animate-pulse bg-[var(--ink)]/40" />
+          </div>
+          <span>Lens · 35mm</span>
+        </div>
       </section>
 
-      {/* ——————————————————— MARQUEE ——————————————————— */}
-      <div className="mt-20 md:mt-28">
-        <Marquee items={marqueeWords} />
-      </div>
-
-      {/* ——————————————————— INTRODUCTION ——————————————————— */}
-      <section id="intro" className="relative mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-        <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-12 md:col-span-5">
-            {/* Image placeholder */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden border border-[var(--ink)] bg-[var(--bone)]">
-              <div className="absolute inset-0 hatch opacity-40" aria-hidden />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)]/70">
-                    Portrait / Placeholder
-                  </p>
-                  <p className="mt-2 font-serif text-5xl italic">S.R.A.</p>
-                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--mute)]">
-                    Drop /public/saeful.jpg
-                  </p>
-                </div>
-              </div>
-              <div className="absolute left-3 top-3 chip bg-[var(--bone)]">
-                ID · 001
-              </div>
-              <div className="absolute bottom-3 right-3 chip bg-[var(--acid)]">
-                Online
-              </div>
+      {/* ═══════════════ SCENE 01 · MANIFESTO ═══════════════ */}
+      <section className="relative overflow-hidden py-32 md:py-48">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+          <p className="label text-[var(--mute)]">§ 01 · Manifesto</p>
+          <h2 className="display-1 mt-8 text-[clamp(4.5rem,17vw,18rem)] leading-[0.82] tracking-[-0.04em]">
+            Code
+            <br />
+            with
+            <br />
+            <span className="italic">clarity.</span>
+          </h2>
+          <div className="mt-16 grid grid-cols-12 gap-8 md:mt-24">
+            <p className="col-span-12 max-w-2xl font-serif text-[clamp(1.25rem,2vw,1.75rem)] italic leading-[1.25] md:col-span-7">
+              “Any fool can write code a machine understands. Good programmers
+              write code humans understand.”
+            </p>
+            <div className="col-span-12 md:col-span-5 md:pl-10">
+              <p className="text-[15px] leading-relaxed text-[var(--ink)]/75">
+                Every project on this site is an attempt to honour that. Small
+                systems. Clear seams. Motion where it earns it. Silence where it
+                doesn&apos;t.
+              </p>
+              <p className="mt-4 text-[15px] leading-relaxed text-[var(--ink)]/75">
+                I don&apos;t build <em>apps</em>. I build small worlds where
+                humans and machines can meet and get something done together.
+              </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="col-span-12 md:col-span-7 md:pl-10">
-            <p className="label text-[var(--mute)]">§ 01 · Introduction</p>
-            <h2 className="display-1 mt-4 text-[clamp(2.4rem,6vw,4.5rem)]">
-              I build things
-              <br />
-              <span className="not-italic">that feel alive.</span>
+      {/* ═══════════════ HERO MOMENT · ORBIT ═══════════════ */}
+      <PainterlyMoment
+        variant="orbit"
+        kicker="§ Cutscene · 01"
+        caption="At the centre — a runtime. Around it — satellites of intent. Agents, automations, and the humans who steer them."
+      />
+
+      {/* ═══════════════ SCENE 02 · WHO IT'S FOR ═══════════════ */}
+      <section className="relative overflow-hidden py-32 md:py-44">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+          <div className="mb-12 flex items-center justify-between md:mb-16">
+            <p className="label text-[var(--mute)]">§ 02 · Who it&apos;s for</p>
+            <p className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--mute)] md:inline">
+              Direct. Welcoming. Respectful.
+            </p>
+          </div>
+          <MistTitle reflectHeight={0.5}>
+            <h2 className="display-2 text-[clamp(4rem,15vw,14rem)] leading-[0.88] tracking-[-0.03em]">
+              Who it&apos;s for.
             </h2>
-            <div className="mt-8 space-y-5 text-[15px] leading-relaxed text-[var(--ink)]/85 md:text-base">
-              <p>
-                Hi — I’m <strong>Saeful Rohman An</strong>, a Computer Science
-                student in Indonesia. I design and engineer products across four
-                disciplines: <em>mobile apps</em>, <em>fullstack web platforms</em>,
-                <em> games</em>, and <em>AI engineering</em>.
-              </p>
-              <p>
-                Lately I’ve been deep into building <strong>autonomous AI
-                agents</strong> — systems that plan, reason, use tools and
-                browsers, and quietly do real work. I also glue LLMs into
-                production automations (ops, sales, support) so teams can focus
-                on what only humans can do.
-              </p>
-              <p>
-                When I’m not shipping code, I’m sketching game loops, obsessing
-                over type, or watching interfaces move in slow motion trying to
-                figure out why exactly that one felt so good.
-              </p>
-            </div>
+          </MistTitle>
 
-            <dl className="mt-10 grid grid-cols-2 gap-6 border-y border-[var(--rule)] py-6 md:grid-cols-4">
-              <Stat k="4+" v="Disciplines" />
-              <Stat k="15+" v="Shipped projects" />
-              <Stat k="∞" v="Curiosity" />
-              <Stat k="ID" v="Based in Indonesia" />
-            </dl>
+          <div className="mt-24 grid grid-cols-1 gap-px border-y border-[var(--rule)] bg-[var(--rule)] md:grid-cols-3">
+            <AudienceCard
+              label="Founders"
+              body="Who need a builder who moves like a team — design, ship, learn, repeat."
+            />
+            <AudienceCard
+              label="Teams"
+              body="Who want agents that actually work in production, not slideware."
+            />
+            <AudienceCard
+              label="Students"
+              body="Who treat code like craft and want a peer, not a tutor."
+            />
           </div>
         </div>
       </section>
 
-      {/* ——————————————————— JOURNEY ——————————————————— */}
+      {/* ═══════════════ HERO MOMENT · MOUNTAIN ═══════════════ */}
+      <PainterlyMoment
+        variant="mountain"
+        kicker="§ Cutscene · 02"
+        caption="From a small island to a quiet studio — the path had fewer straight lines than you&apos;d expect."
+      />
+
+      {/* ═══════════════ SCENE 03 · JOURNEY ═══════════════ */}
       <JourneyMap />
 
-      {/* ——————————————————— SKILLS ——————————————————— */}
-      <section className="relative mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-        <SectionHeading
-          tag="§ 04 · Disciplines"
-          title={
-            <>
-              A stack for{" "}
-              <span className="not-italic">every problem.</span>
-            </>
-          }
-        >
-          Four disciplines, one brain. I pick the boring right tool for the job
-          — and then make it feel unreasonably good.
-        </SectionHeading>
+      {/* ═══════════════ SCENE 04 · PRINCIPLES ═══════════════ */}
+      <PrinciplesWeb />
 
-        <div className="mt-14 grid grid-cols-1 gap-px bg-[var(--rule)] md:grid-cols-2 lg:grid-cols-4">
-          {skillGroups.map((g) => (
-            <div
-              key={g.label}
-              className="group relative flex flex-col gap-4 bg-[var(--bone)] p-8 transition-colors hover:bg-[var(--ink)] hover:text-[var(--bone)]"
+      {/* ═══════════════ HERO MOMENT · HORIZON ═══════════════ */}
+      <PainterlyMoment
+        variant="horizon"
+        kicker="§ Cutscene · 03"
+        caption="The next decade of software writes itself. I build the scaffolding that lets it."
+      />
+
+      {/* ═══════════════ SCENE 05 · WORK POSTERS ═══════════════ */}
+      <section id="work" className="relative">
+        <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-28 md:px-10 md:pb-16 md:pt-40">
+          <p className="label text-[var(--mute)]">§ 05 · Selected work</p>
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
+            <h2 className="display-1 text-[clamp(3rem,9vw,7.5rem)]">
+              The reel.
+            </h2>
+            <Link
+              href="/work"
+              className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)] hover:text-[var(--ink)]"
             >
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)] group-hover:text-[var(--acid)]">
-                / {g.tag}
-              </span>
-              <h3 className="font-serif text-[clamp(1.5rem,2.5vw,2rem)] italic leading-tight">
-                {g.label}
-              </h3>
-              <ul className="mt-2 flex flex-col gap-2 font-mono text-[13px] text-[var(--ink)]/80 group-hover:text-[var(--bone)]/80">
-                {g.items.map((it) => (
-                  <li key={it} className="flex items-start gap-2">
-                    <span className="mt-2 block h-[3px] w-3 bg-current" />
-                    {it}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              All projects →
+            </Link>
+          </div>
+        </div>
+        <div>
+          {projects.slice(0, 4).map((p, i) => (
+            <CinematicWork
+              key={p.slug}
+              project={p}
+              index={i}
+              total={Math.min(4, projects.length)}
+            />
           ))}
         </div>
       </section>
 
-      {/* ——————————————————— FEATURED WORK ——————————————————— */}
-      <section className="relative mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-        <SectionHeading
-          tag="§ 05 · Selected work"
-          title={
-            <>
-              Recent
-              <br />
-              <span className="not-italic">shipments.</span>
-            </>
-          }
-          link="/work"
-          linkLabel="All projects →"
-        />
+      {/* ═══════════════ HERO MOMENT · TERMINAL ═══════════════ */}
+      <PainterlyMoment
+        variant="terminal"
+        kicker="§ End credits"
+        caption="Roll credits. (Your project starts in the next scene.)"
+      />
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p, i) => (
-            <ProjectCard key={p.slug} project={p} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* ——————————————————— BIG CTA ——————————————————— */}
-      <section className="relative mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-        <div className="relative overflow-hidden border border-[var(--ink)] bg-[var(--acid)] p-10 md:p-20">
-          <div className="pointer-events-none absolute inset-0 hatch opacity-40" aria-hidden />
-          <p className="relative label text-[var(--ink)]/70">§ 06 · Open slots</p>
-          <h2 className="relative display-1 mt-4 text-[clamp(3rem,10vw,8rem)]">
-            Got an idea
+      {/* ═══════════════ SCENE 06 · CTA ═══════════════ */}
+      <section className="relative mx-auto max-w-[1400px] px-5 py-32 md:px-10 md:py-48">
+        <MistTitle reflectHeight={0.45}>
+          <h2 className="display-1 text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
+            Let&apos;s build
             <br />
-            <span className="not-italic">worth building?</span>
+            <span className="italic">something alive.</span>
           </h2>
-          <div className="relative mt-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <p className="max-w-lg text-balance text-[17px] leading-relaxed text-[var(--ink)]/80 md:text-lg">
-              I take on a small number of build partnerships each quarter —
-              MVPs, AI agents, polished mobile apps, or weird experiments that
-              shouldn’t work but do.
-            </p>
+        </MistTitle>
+        <div className="mt-20 grid grid-cols-12 gap-6">
+          <p className="col-span-12 max-w-xl text-[15px] leading-relaxed text-[var(--ink)]/75 md:col-span-6">
+            Contract, full-time, collaboration, teaching. If it&apos;s code,
+            design, agents, or games — I&apos;m interested. Quiet inbox, fast
+            reply.
+          </p>
+          <div className="col-span-12 flex flex-wrap gap-3 md:col-span-6 md:justify-end">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 border border-[var(--ink)] bg-[var(--ink)] px-6 py-4 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--bone)]"
+              className="inline-flex items-center gap-2 border border-[var(--ink)] bg-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--bone)]"
             >
-              Start a conversation →
+              Start the conversation →
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 border border-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em]"
+            >
+              Read the long version
             </Link>
           </div>
         </div>
@@ -241,15 +250,37 @@ export default function Home() {
   );
 }
 
-function Stat({ k, v }: { k: string; v: string }) {
+function AudienceCard({ label, body }: { label: string; body: string }) {
   return (
-    <div>
-      <dt className="font-serif text-4xl font-medium italic leading-none md:text-5xl">
-        {k}
-      </dt>
-      <dd className="mt-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)]">
-        {v}
-      </dd>
+    <div className="bg-[var(--bone)] p-8 md:p-10">
+      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)]">
+        / {label}
+      </p>
+      <p className="mt-6 font-serif text-[clamp(1.25rem,2vw,1.5rem)] italic leading-[1.2]">
+        {body}
+      </p>
     </div>
+  );
+}
+
+function TopoLines({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden
+      className={className}
+      viewBox="0 0 1000 500"
+      preserveAspectRatio="none"
+    >
+      <g fill="none" stroke="var(--ink)" strokeWidth="0.6">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <path
+            key={i}
+            d={`M 0 ${420 - i * 14} Q 250 ${
+              380 - i * 14 - (i % 2 ? 20 : 0)
+            } 500 ${400 - i * 14} T 1000 ${410 - i * 14}`}
+          />
+        ))}
+      </g>
+    </svg>
   );
 }

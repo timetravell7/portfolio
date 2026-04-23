@@ -2,12 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import clsx from "clsx";
+import MistTitle from "@/components/mist-title";
+import PainterlyMoment from "@/components/painterly-moment";
 import {
   projects,
   getProject,
   getAdjacentProjects,
   type Project,
 } from "@/data/projects";
+
+const variantByAccent: Record<
+  Project["accent"],
+  "horizon" | "orbit" | "mountain" | "terminal"
+> = {
+  plum: "horizon",
+  cobalt: "orbit",
+  acid: "mountain",
+  ink: "terminal",
+};
 
 type Params = { slug: string };
 
@@ -28,22 +40,16 @@ export async function generateMetadata({
   };
 }
 
-const accentMap: Record<Project["accent"], string> = {
-  acid: "bg-[var(--acid)] text-[var(--ink)]",
-  plum: "bg-[var(--plum)] text-[var(--bone)]",
-  cobalt: "bg-[var(--cobalt)] text-[var(--bone)]",
-  ink: "bg-[var(--ink)] text-[var(--bone)]",
-};
-
 export default function ProjectDetailPage({ params }: { params: Params }) {
   const project = getProject(params.slug);
   if (!project) return notFound();
   const { prev, next } = getAdjacentProjects(params.slug);
-  const accent = accentMap[project.accent];
+  const variant = variantByAccent[project.accent];
 
   return (
     <>
-      <section className="pt-32 md:pt-40">
+      {/* Cold-open hero */}
+      <section className="relative overflow-hidden pt-32 md:pt-40">
         <div className="mx-auto max-w-[1400px] px-5 md:px-10">
           <Link
             href="/work"
@@ -51,16 +57,21 @@ export default function ProjectDetailPage({ params }: { params: Params }) {
           >
             ← All work
           </Link>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <p className="label text-[var(--mute)]">
-                § {project.kind} · {project.year}
-              </p>
-              <h1 className="display-1 mt-6 text-[clamp(2.75rem,10vw,8rem)]">
+          <p className="label mt-10 text-[var(--mute)]">
+            § {project.kind} · {project.year}
+          </p>
+          <div className="mt-6 md:mt-10">
+            <MistTitle reflectHeight={0.5}>
+              <h1 className="display-1 text-[clamp(3rem,13vw,12rem)] leading-[0.82]">
                 {project.title}.
               </h1>
-            </div>
-            <div className="flex flex-wrap gap-2 md:justify-end">
+            </MistTitle>
+          </div>
+          <div className="mt-20 grid grid-cols-12 gap-6 md:mt-28">
+            <p className="col-span-12 max-w-3xl text-balance font-serif text-[clamp(1.3rem,2vw,1.8rem)] italic leading-[1.2] text-[var(--ink)] md:col-span-8">
+              {project.tagline}
+            </p>
+            <div className="col-span-12 flex flex-wrap gap-2 md:col-span-4 md:justify-end">
               {project.stack.map((s) => (
                 <span
                   key={s}
@@ -71,33 +82,16 @@ export default function ProjectDetailPage({ params }: { params: Params }) {
               ))}
             </div>
           </div>
-          <p className="mt-10 max-w-3xl text-balance font-serif text-[clamp(1.3rem,2.4vw,1.9rem)] italic leading-[1.15] text-[var(--ink)]">
-            {project.tagline}
-          </p>
         </div>
       </section>
 
-      {/* Cover */}
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 md:px-10">
-        <div
-          className={clsx(
-            "relative aspect-[16/8] w-full overflow-hidden border border-[var(--ink)]",
-            accent
-          )}
-        >
-          <div className="absolute inset-0 hatch opacity-30" aria-hidden />
-          <div className="absolute left-4 top-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            {project.kind} / {project.year}
-          </div>
-          <div className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            Cover / Placeholder
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-serif text-[clamp(3rem,10vw,8rem)] italic">
-              {project.title}
-            </span>
-          </div>
-        </div>
+      {/* Cinematic cover */}
+      <section className="mt-24 md:mt-32">
+        <PainterlyMoment
+          variant={variant}
+          kicker={`§ Cutscene · ${project.kind}`}
+          caption={project.description}
+        />
       </section>
 
       {/* Meta grid */}
