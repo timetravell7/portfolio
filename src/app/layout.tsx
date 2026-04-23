@@ -5,6 +5,7 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import Grain from "@/components/grain";
 import Cursor from "@/components/cursor";
+import SmoothScroll from "@/components/smooth-scroll";
 
 const serif = Fraunces({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
       className={`${serif.variable} ${sans.variable} ${mono.variable}`}
     >
       <body className="antialiased selection:bg-[var(--ink)] selection:text-[var(--acid)]">
+        <SmoothScroll />
         <Cursor />
         <Grain />
         <Nav />
