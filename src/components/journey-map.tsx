@@ -118,7 +118,7 @@ export default function JourneyMap() {
                   {/* Content card */}
                   <div
                     className={clsx(
-                      "col-start-2 row-start-1 md:col-start-auto md:row-start-auto",
+                      "col-start-2 row-start-1",
                       side === "left"
                         ? "md:col-start-1 md:pr-20 md:text-right"
                         : "md:col-start-2 md:pl-20"
