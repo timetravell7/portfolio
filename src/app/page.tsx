@@ -4,13 +4,22 @@ import MistTitle from "@/components/mist-title";
 import PainterlyMoment from "@/components/painterly-moment";
 import PrinciplesWeb from "@/components/principles-web";
 import CinematicWork from "@/components/cinematic-work";
+import CurtainIntro from "@/components/curtain-intro";
+import ScrollReveal from "@/components/scroll-reveal";
+import Parallax from "@/components/parallax";
 import { projects } from "@/data/projects";
 
 export default function Home() {
   return (
     <>
+      {/* ═══════════════ SCENE -1 · THE CURTAIN ═══════════════ */}
+      <CurtainIntro />
+
       {/* ═══════════════ SCENE 00 · COLD OPEN ═══════════════ */}
-      <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
+      <section
+        data-parallax-scope
+        className="relative isolate flex min-h-[100svh] flex-col overflow-hidden"
+      >
         {/* Background: horizon gradient + topographic lines */}
         <div
           aria-hidden
@@ -20,9 +29,10 @@ export default function Home() {
               "linear-gradient(to bottom, var(--bone) 0%, #f6efde 55%, #efe4c8 100%)",
           }}
         />
-        <TopoLines className="absolute inset-x-0 bottom-[-10%] top-[30%] -z-10 opacity-[0.18]" />
+        <Parallax speed={-60} className="absolute inset-x-0 bottom-[-10%] top-[30%] -z-10">
+          <TopoLines className="absolute inset-0 opacity-[0.18]" />
+        </Parallax>
 
-        {/* Title frame */}
         <div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center px-5 md:px-10">
           <div className="flex items-center justify-between pt-32 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)]/60 md:pt-40">
             <span className="flex items-center gap-2">
@@ -36,27 +46,32 @@ export default function Home() {
           </div>
 
           <div className="mt-12 md:mt-20">
-            <MistTitle reflectHeight={0.6}>
-              <h1 className="display-1 text-[clamp(4rem,17vw,16rem)] leading-[0.82]">
-                Saeful
-                <br />
-                <span className="font-light italic">Rohman An</span>
-              </h1>
-            </MistTitle>
+            <ScrollReveal mode="words" stagger={0.06} start="top 95%">
+              <MistTitle reflectHeight={0.6}>
+                <h1 className="display-1 text-[clamp(4rem,17vw,16rem)] leading-[0.82]">
+                  Saeful Rohman An.
+                </h1>
+              </MistTitle>
+            </ScrollReveal>
           </div>
 
           <div className="mt-20 grid grid-cols-12 gap-6 md:mt-32">
-            <p className="col-span-12 max-w-2xl text-balance font-serif text-[clamp(1.1rem,1.6vw,1.4rem)] italic leading-[1.4] text-[var(--ink)]/80 md:col-span-7">
-              Computer Science student. I build at the intersection of{" "}
-              <span className="not-italic font-medium">mobile</span>,{" "}
-              <span className="not-italic font-medium">fullstack web</span>,{" "}
-              <span className="not-italic font-medium">games</span>, and{" "}
-              <span className="not-italic font-medium">AI engineering</span>
-              &nbsp;— autonomous agents, automations, and interfaces that move
-              the way they should.
-            </p>
+            <ScrollReveal className="col-span-12 md:col-span-7" stagger={0.1}>
+              <p className="max-w-2xl text-balance font-serif text-[clamp(1.1rem,1.6vw,1.4rem)] italic leading-[1.4] text-[var(--ink)]/80">
+                Computer Science student. I build at the intersection of{" "}
+                <span className="not-italic font-medium">mobile</span>,{" "}
+                <span className="not-italic font-medium">fullstack web</span>,{" "}
+                <span className="not-italic font-medium">games</span>, and{" "}
+                <span className="not-italic font-medium">AI engineering</span>
+                &nbsp;— autonomous agents, automations, and interfaces that move
+                the way they should.
+              </p>
+            </ScrollReveal>
 
-            <div className="col-span-12 flex flex-col gap-4 md:col-span-5 md:items-end md:justify-end md:text-right">
+            <ScrollReveal
+              className="col-span-12 flex flex-col gap-4 md:col-span-5 md:items-end md:justify-end md:text-right"
+              stagger={0.1}
+            >
               <p className="label text-[var(--mute)]">Now playing</p>
               <p className="font-serif text-xl italic md:text-2xl">
                 Shipping agents & fullstack platforms.
@@ -75,7 +90,7 @@ export default function Home() {
                   See the work
                 </Link>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
 
@@ -93,20 +108,22 @@ export default function Home() {
       {/* ═══════════════ SCENE 01 · MANIFESTO ═══════════════ */}
       <section className="relative overflow-hidden py-32 md:py-48">
         <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-          <p className="label text-[var(--mute)]">§ 01 · Manifesto</p>
-          <h2 className="display-1 mt-8 text-[clamp(4.5rem,17vw,18rem)] leading-[0.82] tracking-[-0.04em]">
-            Code
-            <br />
-            with
-            <br />
-            <span className="italic">clarity.</span>
-          </h2>
+          <ScrollReveal>
+            <p className="label text-[var(--mute)]">§ 01 · Manifesto</p>
+          </ScrollReveal>
+          <ScrollReveal mode="words" stagger={0.08} start="top 85%">
+            <h2 className="display-1 mt-8 text-[clamp(4.5rem,17vw,18rem)] leading-[0.82] tracking-[-0.04em]">
+              Code with clarity.
+            </h2>
+          </ScrollReveal>
           <div className="mt-16 grid grid-cols-12 gap-8 md:mt-24">
-            <p className="col-span-12 max-w-2xl font-serif text-[clamp(1.25rem,2vw,1.75rem)] italic leading-[1.25] md:col-span-7">
-              “Any fool can write code a machine understands. Good programmers
-              write code humans understand.”
-            </p>
-            <div className="col-span-12 md:col-span-5 md:pl-10">
+            <ScrollReveal className="col-span-12 md:col-span-7">
+              <p className="max-w-2xl font-serif text-[clamp(1.25rem,2vw,1.75rem)] italic leading-[1.25]">
+                &ldquo;Any fool can write code a machine understands. Good
+                programmers write code humans understand.&rdquo;
+              </p>
+            </ScrollReveal>
+            <ScrollReveal className="col-span-12 md:col-span-5 md:pl-10" stagger={0.1}>
               <p className="text-[15px] leading-relaxed text-[var(--ink)]/75">
                 Every project on this site is an attempt to honour that. Small
                 systems. Clear seams. Motion where it earns it. Silence where it
@@ -116,7 +133,7 @@ export default function Home() {
                 I don&apos;t build <em>apps</em>. I build small worlds where
                 humans and machines can meet and get something done together.
               </p>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -132,29 +149,36 @@ export default function Home() {
       <section className="relative overflow-hidden py-32 md:py-44">
         <div className="mx-auto max-w-[1400px] px-5 md:px-10">
           <div className="mb-12 flex items-center justify-between md:mb-16">
-            <p className="label text-[var(--mute)]">§ 02 · Who it&apos;s for</p>
+            <ScrollReveal>
+              <p className="label text-[var(--mute)]">§ 02 · Who it&apos;s for</p>
+            </ScrollReveal>
             <p className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--mute)] md:inline">
               Direct. Welcoming. Respectful.
             </p>
           </div>
-          <MistTitle reflectHeight={0.5}>
-            <h2 className="display-2 text-[clamp(4rem,15vw,14rem)] leading-[0.88] tracking-[-0.03em]">
-              Who it&apos;s for.
-            </h2>
-          </MistTitle>
+          <ScrollReveal mode="words" stagger={0.07} start="top 85%">
+            <MistTitle reflectHeight={0.5}>
+              <h2 className="display-2 text-[clamp(4rem,15vw,14rem)] leading-[0.88] tracking-[-0.03em]">
+                Who it&apos;s for.
+              </h2>
+            </MistTitle>
+          </ScrollReveal>
 
           <div className="mt-24 grid grid-cols-1 gap-px border-y border-[var(--rule)] bg-[var(--rule)] md:grid-cols-3">
             <AudienceCard
               label="Founders"
               body="Who need a builder who moves like a team — design, ship, learn, repeat."
+              delay={0}
             />
             <AudienceCard
               label="Teams"
               body="Who want agents that actually work in production, not slideware."
+              delay={0.12}
             />
             <AudienceCard
               label="Students"
               body="Who treat code like craft and want a peer, not a tutor."
+              delay={0.24}
             />
           </div>
         </div>
@@ -183,11 +207,15 @@ export default function Home() {
       {/* ═══════════════ SCENE 05 · WORK POSTERS ═══════════════ */}
       <section id="work" className="relative">
         <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-28 md:px-10 md:pb-16 md:pt-40">
-          <p className="label text-[var(--mute)]">§ 05 · Selected work</p>
+          <ScrollReveal>
+            <p className="label text-[var(--mute)]">§ 05 · Selected work</p>
+          </ScrollReveal>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
-            <h2 className="display-1 text-[clamp(3rem,9vw,7.5rem)]">
-              The reel.
-            </h2>
+            <ScrollReveal mode="words" stagger={0.06}>
+              <h2 className="display-1 text-[clamp(3rem,9vw,7.5rem)]">
+                The reel.
+              </h2>
+            </ScrollReveal>
             <Link
               href="/work"
               className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)] hover:text-[var(--ink)]"
@@ -217,20 +245,25 @@ export default function Home() {
 
       {/* ═══════════════ SCENE 06 · CTA ═══════════════ */}
       <section className="relative mx-auto max-w-[1400px] px-5 py-32 md:px-10 md:py-48">
-        <MistTitle reflectHeight={0.45}>
-          <h2 className="display-1 text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
-            Let&apos;s build
-            <br />
-            <span className="italic">something alive.</span>
-          </h2>
-        </MistTitle>
+        <ScrollReveal mode="words" stagger={0.07}>
+          <MistTitle reflectHeight={0.45}>
+            <h2 className="display-1 text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
+              Let&apos;s build something alive.
+            </h2>
+          </MistTitle>
+        </ScrollReveal>
         <div className="mt-20 grid grid-cols-12 gap-6">
-          <p className="col-span-12 max-w-xl text-[15px] leading-relaxed text-[var(--ink)]/75 md:col-span-6">
-            Contract, full-time, collaboration, teaching. If it&apos;s code,
-            design, agents, or games — I&apos;m interested. Quiet inbox, fast
-            reply.
-          </p>
-          <div className="col-span-12 flex flex-wrap gap-3 md:col-span-6 md:justify-end">
+          <ScrollReveal className="col-span-12 md:col-span-6">
+            <p className="max-w-xl text-[15px] leading-relaxed text-[var(--ink)]/75">
+              Contract, full-time, collaboration, teaching. If it&apos;s code,
+              design, agents, or games — I&apos;m interested. Quiet inbox, fast
+              reply.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal
+            className="col-span-12 flex flex-wrap gap-3 md:col-span-6 md:justify-end"
+            stagger={0.12}
+          >
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 border border-[var(--ink)] bg-[var(--ink)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--bone)]"
@@ -243,23 +276,33 @@ export default function Home() {
             >
               Read the long version
             </Link>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </>
   );
 }
 
-function AudienceCard({ label, body }: { label: string; body: string }) {
+function AudienceCard({
+  label,
+  body,
+  delay,
+}: {
+  label: string;
+  body: string;
+  delay: number;
+}) {
   return (
-    <div className="bg-[var(--bone)] p-8 md:p-10">
-      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)]">
-        / {label}
-      </p>
-      <p className="mt-6 font-serif text-[clamp(1.25rem,2vw,1.5rem)] italic leading-[1.2]">
-        {body}
-      </p>
-    </div>
+    <ScrollReveal mode="block" delay={delay}>
+      <div className="bg-[var(--bone)] p-8 md:p-10">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--mute)]">
+          / {label}
+        </p>
+        <p className="mt-6 font-serif text-[clamp(1.25rem,2vw,1.5rem)] italic leading-[1.2]">
+          {body}
+        </p>
+      </div>
+    </ScrollReveal>
   );
 }
 
