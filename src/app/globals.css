@@ -235,3 +235,22 @@ a {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
+
+/* Curtain scroll cue */
+@keyframes curtain-scroll {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(250%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* ScrollReveal word splits */
+.sr-word-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+}

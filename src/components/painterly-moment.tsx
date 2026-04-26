@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import Parallax from "@/components/parallax";
+import ScrollReveal from "@/components/scroll-reveal";
 
 type Variant = "horizon" | "mountain" | "orbit" | "terminal";
 
@@ -19,9 +21,10 @@ export default function PainterlyMoment({
 }) {
   return (
     <section
+      data-parallax-scope
       className={clsx(
         "relative w-full overflow-hidden",
-        "h-[72vh] min-h-[520px]",
+        "h-[88vh] min-h-[600px]",
         className
       )}
     >
@@ -32,14 +35,21 @@ export default function PainterlyMoment({
 
       {(kicker || caption) && (
         <div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-end px-5 pb-16 md:px-10 md:pb-24">
-          {kicker && (
-            <p className="label text-[var(--bone)]/70">{kicker}</p>
-          )}
-          {caption && (
-            <p className="mt-3 max-w-xl font-serif text-[clamp(1.25rem,2.2vw,1.9rem)] italic leading-[1.15] text-[var(--bone)]">
-              {caption}
-            </p>
-          )}
+          <ScrollReveal mode="words" stagger={0.04}>
+            {kicker && (
+              <p data-split className="label text-[var(--bone)]/70">
+                {kicker}
+              </p>
+            )}
+            {caption && (
+              <p
+                data-split
+                className="mt-3 max-w-xl font-serif text-[clamp(1.25rem,2.2vw,1.9rem)] italic leading-[1.15] text-[var(--bone)]"
+              >
+                {caption}
+              </p>
+            )}
+          </ScrollReveal>
         </div>
       )}
     </section>
@@ -51,18 +61,20 @@ function Horizon() {
     <>
       <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_110%,#ff5b3f_0%,#a42417_40%,#220805_78%,#000_100%)]" />
       {/* Sun */}
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          width: "min(62vw, 780px)",
-          aspectRatio: "1",
-          borderRadius: "9999px",
-          background:
-            "radial-gradient(circle at 50% 50%, #ffd6a0 0%, #ff9054 30%, rgba(255,121,71,0.15) 70%, transparent 72%)",
-          filter: "blur(0.5px)",
-        }}
-      />
+      <Parallax speed={-140} className="absolute inset-0">
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2"
+          style={{
+            width: "min(62vw, 780px)",
+            aspectRatio: "1",
+            borderRadius: "9999px",
+            background:
+              "radial-gradient(circle at 50% 50%, #ffd6a0 0%, #ff9054 30%, rgba(255,121,71,0.15) 70%, transparent 72%)",
+            filter: "blur(0.5px)",
+          }}
+        />
+      </Parallax>
       {/* Horizon lines */}
       <svg
         aria-hidden
@@ -108,16 +120,18 @@ function Mountain() {
   return (
     <>
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#f7f1e3_0%,#eadfbf_55%,#d6c59a_100%)]" />
-      {/* Sun disc */}
-      <div
-        aria-hidden
-        className="absolute left-[62%] top-[28%] h-[22vw] w-[22vw] max-h-80 max-w-80 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, #ff3d2e 0%, #c21a10 52%, rgba(194,26,16,0) 58%)",
-          filter: "blur(0.4px)",
-        }}
-      />
+      {/* Sun disc — slowest */}
+      <Parallax speed={-60} className="absolute inset-0">
+        <div
+          aria-hidden
+          className="absolute left-[62%] top-[28%] h-[22vw] w-[22vw] max-h-80 max-w-80 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 50%, #ff3d2e 0%, #c21a10 52%, rgba(194,26,16,0) 58%)",
+            filter: "blur(0.4px)",
+          }}
+        />
+      </Parallax>
       {/* Mountain silhouette layers */}
       <svg
         aria-hidden
