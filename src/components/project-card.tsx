@@ -1,3 +1,4 @@
+import Link from "next/link";
 import clsx from "clsx";
 import type { Project } from "@/data/projects";
 
@@ -17,7 +18,11 @@ export default function ProjectCard({
 }) {
   const accent = accentMap[project.accent];
   return (
-    <article className="group relative flex flex-col overflow-hidden border border-[var(--ink)] bg-[var(--bone)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[12px_12px_0_0_var(--ink)]">
+    <Link
+      href={`/work/${project.slug}`}
+      className="group relative flex flex-col overflow-hidden border border-[var(--ink)] bg-[var(--bone)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[12px_12px_0_0_var(--ink)]"
+      aria-label={`${project.title} — open case study`}
+    >
       <div
         className={clsx(
           "relative aspect-[4/3] w-full overflow-hidden border-b border-[var(--ink)]",
@@ -52,12 +57,15 @@ export default function ProjectCard({
           ))}
         </ul>
         <div className="mt-auto flex items-center justify-between border-t border-[var(--rule)] pt-4 font-mono text-[11px] uppercase tracking-[0.2em]">
-          <span className="text-[var(--mute)]">{project.role}</span>
-          <span aria-hidden className="transition-transform group-hover:translate-x-1">
+          <span className="text-[var(--mute)]">Open case study</span>
+          <span
+            aria-hidden
+            className="transition-transform group-hover:translate-x-1"
+          >
             →
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
